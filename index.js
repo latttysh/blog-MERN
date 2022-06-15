@@ -5,6 +5,7 @@ import { registerValidation } from './validations/auth.js';
 import { postCreateValidation } from './validations/post.js';
 import checkAuth from './utils/checkAuth.js';
 
+import cors from 'cors';
 import { create, getAll, getOne, remove, update } from './controllers/PostController.js';
 import { register, login, getMe } from './controllers/UserController.js';
 import handleValidationErrors from './utils/handleValidationErrors.js';
@@ -30,6 +31,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage }); // init
 
 app.use(express.json());
+app.use(cors()); // fix cors error
 app.use('/uploads', express.static('uploads')); // return image on route "/uploads"
 
 app.post('/auth/login', login);
