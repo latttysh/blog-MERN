@@ -6,7 +6,14 @@ import { postCreateValidation } from './validations/post.js';
 import checkAuth from './utils/checkAuth.js';
 
 import cors from 'cors';
-import { create, getAll, getOne, remove, update } from './controllers/PostController.js';
+import {
+  create,
+  getAll,
+  getOne,
+  remove,
+  update,
+  getLastTags,
+} from './controllers/PostController.js';
 import { register, login, getMe } from './controllers/UserController.js';
 import handleValidationErrors from './utils/handleValidationErrors.js';
 
@@ -45,6 +52,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 });
 
 app.get('/posts', getAll);
+app.get('/tags', getLastTags);
 app.get('/posts/:id', getOne);
 app.post('/posts', checkAuth, postCreateValidation, create);
 app.delete('/posts/:id', checkAuth, remove);
